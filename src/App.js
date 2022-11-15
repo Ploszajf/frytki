@@ -76,7 +76,7 @@ function App() {
     } else {
       clearInterval(moveID)
       mobileX.current = e.changedTouches[0].clientX / document.body.clientWidth * 100
-      moveID(mobileTouch, 10)
+      moveID(mobileTouch, 20)
     }
 
   });
