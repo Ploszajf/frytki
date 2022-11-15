@@ -7,7 +7,8 @@ export class Obstacle extends Component {
             top: this.props.top + 'vh',
             width: this.props.width + '%',
             height: this.props.height + 'px',
-            left: this.props.left + '%'
+            left: this.props.left + '%',
+            border: '3px solid red'
         }
         const imgStyle = {
             width: "100%",
