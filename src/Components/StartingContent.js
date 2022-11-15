@@ -12,6 +12,7 @@ export class StartingContent extends Component {
         return (
             <div style={style} >
                 <p>Use A/Left arrow & D/Right Arrow to move</p>
+                <p>or move fries box with your finger</p>
                 <p>Score 10 points</p>
             </div >
         )
