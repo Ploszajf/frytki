@@ -4,7 +4,7 @@ import StartingContent from './Components/StartingContent';
 import Player from './Components/Player';
 import Background from './Components/Background';
 import Game from './Components/Game';
-import Obstacle from './Components/Obstacle';
+import Fries from './Components/Fries';
 import Score from './Components/Score';
 import FinalScore from './Components/FinalScore';
 import * as constants from './constants';
@@ -19,11 +19,11 @@ function App() {
   const finalMessage = 'Your final score: ';                      //
 
   const [playerPositionX, setPlayerPositionX] = useState(50);     //X position of the player
-  const [obstacleLeftWidth, setObstacleLeftWidth] = useState(Math.random() * (100 - constants.OBSTACLE_GAP * 2) + constants.OBSTACLE_GAP);   //Left obstacle width
-  const [obstacleTop, setObstacleTop] = useState(0); //Y position of obstacles
+  const [obstacleTop, setFriesTop] = useState(0); //Y position of obstacles
   const [game, setGame] = useState(true);                         //Condition for the duration of the game
   const [score, setScore] = useState(0);                         //Number of scored points
   const [win, setWin] = useState();                               //Text of the message about the end of the game in the center of the screen
+  const [friesLeft, setFriesLeft] = useState(Math.random() * (100 - constants.FRIES_WIDTH) + constants.FRIES_WIDTH)
   const [scoreboardVis, setScoreboadrVis] = useState("none");    //Showing/hiding scoreboard
   const [endMessageVis, setEndMessageVis] = useState("none");     //Showing/hiding the message about the end of the game
   const [gameVis, setGameVis] = useState("none");
@@ -38,7 +38,7 @@ function App() {
     setStartingScreenVis("none")
     setGameVis("block")
     setPlayerPositionX(50)
-    setObstacleTop(-constants.OBSTACLE_HEIGHT)
+    setFriesTop(-constants.FRIES_HEIGHT)
   }
 
   //EventListeners for move
@@ -102,7 +102,7 @@ function App() {
       if ((key === "a" || key === "A" || key === "ArrowLeft") && (currentPosition.current > 1)) {
         setPlayerPositionX(playerPositionX => playerPositionX - constants.MOVE_VALUE);
       }
-      if ((key === "d" || key === "D" || key === "ArrowRight") && ((currentPosition.current + constants.PLAYER_SIZE_WIDTH) < 99)) {
+      if ((key === "d" || key === "D" || key === "ArrowRight") && ((currentPosition.current + constants.PLAYER_WIDTH) < 99)) {
         setPlayerPositionX(playerPositionX => playerPositionX + constants.MOVE_VALUE);
       }
       setTimeout(move, 5)
@@ -111,18 +111,18 @@ function App() {
 
   function mobileTouch() {
     if (touch.current) {
-      if (mobileX.current < currentPosition.current + constants.PLAYER_SIZE_WIDTH && ((currentPosition.current) > 1)) {
-        if (mobileX.current - (currentPosition.current + constants.PLAYER_SIZE_WIDTH) > constants.MOVE_VALUE) {
+      if (mobileX.current < currentPosition.current + constants.PLAYER_WIDTH && ((currentPosition.current) > 1)) {
+        if (mobileX.current - (currentPosition.current + constants.PLAYER_WIDTH) > constants.MOVE_VALUE) {
           setPlayerPositionX(playerPositionX => playerPositionX - constants.MOVE_VALUE);
         } else {
-          setPlayerPositionX(mobileX.current - constants.PLAYER_SIZE_WIDTH / 2)
+          setPlayerPositionX(mobileX.current - constants.PLAYER_WIDTH / 2)
         }
       }
-      if (mobileX.current > currentPosition.current + constants.PLAYER_SIZE_WIDTH && (currentPosition.current + constants.PLAYER_SIZE_WIDTH < 99)) {
-        if ((currentPosition.current + constants.PLAYER_SIZE_WIDTH) - mobileX.current > constants.MOVE_VALUE) {
+      if (mobileX.current > currentPosition.current + constants.PLAYER_WIDTH && (currentPosition.current + constants.PLAYER_WIDTH < 99)) {
+        if ((currentPosition.current + constants.PLAYER_WIDTH) - mobileX.current > constants.MOVE_VALUE) {
           setPlayerPositionX(playerPositionX => playerPositionX + constants.MOVE_VALUE);
         } else {
-          setPlayerPositionX(mobileX.current - constants.PLAYER_SIZE_WIDTH / 2)
+          setPlayerPositionX(mobileX.current - constants.PLAYER_WIDTH / 2)
         }
       }
     }
@@ -141,7 +141,7 @@ function App() {
     if (start) {
       if (game && obstacleTop <= 100) {
         obsticleInterval = setInterval(() => {
-          setObstacleTop(obstacleTop => obstacleTop + constants.OBSTACLE_SPEED)
+          setFriesTop(obstacleTop => obstacleTop + constants.FRIES_SPEED)
         }, 20);
 
         return () => {
@@ -149,13 +149,8 @@ function App() {
         };
       }
       else {
-        setObstacleTop(- (constants.OBSTACLE_HEIGHT / document.body.clientHeight * 100));
-        setObstacleLeftWidth(Math.random() * (100 - constants.OBSTACLE_GAP * 2) + constants.OBSTACLE_GAP);
-
-        //points
-        if (game) {
-          setScore(score => score + 1)
-        }
+        setFriesTop(-constants.FRIES_HEIGHT);
+        setFriesLeft(Math.random() * (100 - constants.FRIES_WIDTH * 2) + constants.FRIES_WIDTH * 2)
         return () => {
           clearInterval(obsticleInterval)
         };
@@ -177,22 +172,19 @@ function App() {
 
   }, [score])
 
-  //Colision with the obstacles
+  //Colision with the fries
   useEffect(() => {
-    const colisionLeft = playerPositionX >= 0 && playerPositionX < obstacleLeftWidth
-    const colisionRight = playerPositionX >= obstacleLeftWidth + constants.OBSTACLE_GAP - constants.PLAYER_SIZE_WIDTH
-    const colisionTop = obstacleTop - (constants.OBSTACLE_HEIGHT / document.body.clientHeight * 100) - constants.PLAYER_SIZE_HEIGHT < constants.PLAYER_POSITION_Y
-    const colisionBottom = obstacleTop + (constants.OBSTACLE_HEIGHT / document.body.clientHeight * 100) > constants.PLAYER_POSITION_Y
+    const colisionTop = obstacleTop > constants.PLAYER_POSITION_Y
+    const colisionBottom = obstacleTop < constants.PLAYER_POSITION_Y + constants.COLISION_RANGE
     if (colisionTop && colisionBottom) {
-      if (colisionLeft || colisionRight) {
-        setGame(false)
-        setWin(constants.LOSE_MESSAGE)
-        setEndMessageVis("block")
-        setScoreboadrVis("none")
+      if (playerPositionX <= friesLeft + constants.FRIES_WIDTH && playerPositionX >= friesLeft - constants.PLAYER_WIDTH) {
+        setScore(score => score + 1)
+        console.log(obstacleTop)
+        setFriesTop(-constants.FRIES_HEIGHT);
+        setFriesLeft(Math.random() * (100 - constants.FRIES_WIDTH) + constants.FRIES_WIDTH)
       }
     }
-
-  }, [obstacleLeftWidth, obstacleTop, playerPositionX]);
+  }, [obstacleTop, playerPositionX, score, friesLeft]);
 
 
 
@@ -211,19 +203,12 @@ function App() {
         {finalMessage}{score}
       </FinalScore>
       <Game vis={gameVis}>
-
-        <Obstacle
+        <Fries
           top={obstacleTop}
-          height={constants.OBSTACLE_HEIGHT}
-          left={0}
-          width={obstacleLeftWidth} />
-        <Obstacle
-          top={obstacleTop}
-          height={constants.OBSTACLE_HEIGHT}
-          left={100 - (100 - obstacleLeftWidth - constants.OBSTACLE_GAP)}
-          width={100 - obstacleLeftWidth - constants.OBSTACLE_GAP}
-        />
-        <Player id='player' width={constants.PLAYER_SIZE_WIDTH} height={constants.PLAYER_SIZE_HEIGHT} top={constants.PLAYER_POSITION_Y} left={playerPositionX} />
+          height={constants.FRIES_HEIGHT}
+          left={friesLeft}
+          width={constants.FRIES_WIDTH} />
+        <Player id='player' width={constants.PLAYER_WIDTH} height={constants.PLAYER_HEIGHT} top={constants.PLAYER_POSITION_Y} left={playerPositionX} />
       </Game>
     </Background>
   );

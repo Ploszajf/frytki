@@ -8,7 +8,7 @@ export class Score extends Component {
             top: 10,
             left: 10,
             height: 20 + 'px',
-            zIndex: 10,
+            zIndex: 15,
             fontSize: 30 + 'px'
         }
         return (

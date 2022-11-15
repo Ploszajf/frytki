@@ -1,10 +1,11 @@
-export const PLAYER_SIZE_WIDTH = 8;
-export const PLAYER_SIZE_HEIGHT = 12;
+export const PLAYER_WIDTH = 8;
+export const PLAYER_HEIGHT = 12;
 export const PLAYER_POSITION_Y = 74;
 export const MOVE_VALUE = 0.7;
-export const OBSTACLE_HEIGHT = 35;
-export const OBSTACLE_GAP = 20;
-export const OBSTACLE_SPEED = 1.5;
+export const FRIES_HEIGHT = 10;
+export const FRIES_SPEED = 1.5;
 export const MAX_SCORE = 10;
+export const FRIES_WIDTH = 4;
+export const COLISION_RANGE = 4;
 export const WIN_MESSAGE = "You won";
 export const LOSE_MESSAGE = "You lost";
