@@ -8,7 +8,8 @@ export class Player extends Component {
             width: this.props.width + 'vw',
             top: this.props.top + 'vh',
             left: this.props.left + '%',
-            border: '2px solid red'
+            border: '2px solid red',
+            boxSizing: 'border-box'
         };
         const imgStyle = {
             width: 100 + '%',
