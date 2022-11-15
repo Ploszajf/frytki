@@ -110,15 +110,23 @@ function App() {
 
   function mobileTouch() {
     if (touch.current) {
-      console.log("aaa")
-      if (mobileX.current < currentPosition.current - constants.MOVE_VALUE + constants.PLAYER_SIZE_WIDTH / 2 && ((currentPosition.current) > 1)) {
-        setPlayerPositionX(playerPositionX => playerPositionX - constants.MOVE_VALUE);
+      if (mobileX.current < currentPosition.current + constants.PLAYER_SIZE_WIDTH && ((currentPosition.current) > 1)) {
+        if (mobileX.current - (currentPosition.current + constants.PLAYER_SIZE_WIDTH) > constants.MOVE_VALUE) {
+          setPlayerPositionX(playerPositionX => playerPositionX - constants.MOVE_VALUE);
+        } else {
+          setPlayerPositionX(mobileX.current - constants.PLAYER_SIZE_WIDTH / 2)
+        }
       }
-      if (mobileX.current > currentPosition.current + constants.MOVE_VALUE + constants.PLAYER_SIZE_WIDTH / 2 && (currentPosition.current + constants.PLAYER_SIZE_WIDTH < 99)) {
-        setPlayerPositionX(playerPositionX => playerPositionX + constants.MOVE_VALUE);
+      if (mobileX.current > currentPosition.current + constants.PLAYER_SIZE_WIDTH && (currentPosition.current + constants.PLAYER_SIZE_WIDTH < 99)) {
+        if ((currentPosition.current + constants.PLAYER_SIZE_WIDTH) - mobileX.current > constants.MOVE_VALUE) {
+          setPlayerPositionX(playerPositionX => playerPositionX + constants.MOVE_VALUE);
+        } else {
+          setPlayerPositionX(mobileX.current - constants.PLAYER_SIZE_WIDTH / 2)
+        }
       }
     }
   }
+
 
 
   //Setting player position on screen
