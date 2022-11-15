@@ -69,12 +69,13 @@ function App() {
     mobileX.current = e.changedTouches[0].clientX / document.body.clientWidth * 100
     mobileTouch(e)
   });
-  let moveID = setInterval
+  let moveID = setTimeout
   document.addEventListener('touchmove', (e) => {
     if (mobileX.current === e.changedTouches[0].clientX / document.body.clientWidth * 100) {
+      clearTimeout(moveID)
       return
     } else {
-      clearInterval(moveID)
+      clearTimeout(moveID)
       mobileX.current = e.changedTouches[0].clientX / document.body.clientWidth * 100
       moveID(mobileTouch, 20)
     }
