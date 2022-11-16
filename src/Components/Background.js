@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import background from '../images/background.jpg'
 export class Background extends Component {
     render() {
 
@@ -8,7 +8,7 @@ export class Background extends Component {
             justifyContent: 'center',
             widty: 100 + '%',
             height: 100 + 'vh',
-            backgroundImage: 'url("../images/background.jpg")',
+            backgroundImage: `url(${background})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center'
 
