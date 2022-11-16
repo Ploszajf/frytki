@@ -128,7 +128,9 @@ function App() {
     }
   }
 
-
+  function playAgain() {
+    document.location.reload()
+  }
 
   //Setting player position on screen
   useEffect(() => {
@@ -201,6 +203,9 @@ function App() {
         {win}
         <br />
         {finalMessage}{score}
+        <div>
+          <button onClick={playAgain}>Play again</button>
+        </div>
       </FinalScore>
       <Game vis={gameVis}>
         <Fries
