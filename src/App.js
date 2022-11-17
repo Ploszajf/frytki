@@ -122,7 +122,8 @@ function App() {
         if ((currentPosition.current + constants.PLAYER_WIDTH + constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100) - mobileX.current > constants.MOVE_VALUE) {
           setPlayerPositionX(playerPositionX => playerPositionX + constants.MOVE_VALUE);
         } else {
-          setPlayerPositionX(mobileX.current - (constants.PLAYER_WIDTH / 2) - (constants.PLAYER_PX_WIDTH/ document.body.clientWidth * 100)
+          setPlayerPositionX(mobileX.current - (constants.PLAYER_WIDTH / 2) - (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100)
+          )
         }
       }
     }
@@ -215,14 +216,14 @@ function App() {
           width={constants.FRIES_WIDTH}
           pxWidth={constants.FRIES_PX_WIDTH}
           pxHeight={constants.FRIES_PX_HEIGHT}
-          />
-        <Player id='player' 
-        width={constants.PLAYER_WIDTH} 
-        height={constants.PLAYER_HEIGHT} 
-        top={constants.PLAYER_POSITION_Y} 
-        left={playerPositionX}
-        pxWidth={constants.PLAYER_PX_WIDTH}
-        pxHeight={constants.PLAYER_PX_HEIGHT}
+        />
+        <Player id='player'
+          width={constants.PLAYER_WIDTH}
+          height={constants.PLAYER_HEIGHT}
+          top={constants.PLAYER_POSITION_Y}
+          left={playerPositionX}
+          pxWidth={constants.PLAYER_PX_WIDTH}
+          pxHeight={constants.PLAYER_PX_HEIGHT}
         />
       </Game>
     </Background>
