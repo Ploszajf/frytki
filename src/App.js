@@ -102,7 +102,7 @@ function App() {
       if ((key === "a" || key === "A" || key === "ArrowLeft") && (currentPosition.current > 1)) {
         setPlayerPositionX(playerPositionX => playerPositionX - constants.MOVE_VALUE);
       }
-      if ((key === "d" || key === "D" || key === "ArrowRight") && ((currentPosition.current + constants.PLAYER_WIDTH) < 99)) {
+      if ((key === "d" || key === "D" || key === "ArrowRight") && ((currentPosition.current + constants.PLAYER_WIDTH + constants.PLAYER_PX_WIDTH) < 99)) {
         setPlayerPositionX(playerPositionX => playerPositionX + constants.MOVE_VALUE);
       }
       setTimeout(move, 5)
@@ -111,18 +111,18 @@ function App() {
 
   function mobileTouch() {
     if (touch.current) {
-      if (mobileX.current < currentPosition.current + constants.PLAYER_WIDTH && ((currentPosition.current) > 1)) {
-        if (mobileX.current - (currentPosition.current + constants.PLAYER_WIDTH) > constants.MOVE_VALUE) {
+      if (mobileX.current < currentPosition.current + constants.PLAYER_WIDTH + constants.PLAYER_PX_WIDTH && ((currentPosition.current) > 1)) {
+        if (mobileX.current - (currentPosition.current + constants.PLAYER_WIDTH + constants.PLAYER_PX_WIDTH) > constants.MOVE_VALUE) {
           setPlayerPositionX(playerPositionX => playerPositionX - constants.MOVE_VALUE);
         } else {
-          setPlayerPositionX(mobileX.current - constants.PLAYER_WIDTH / 2)
+          setPlayerPositionX(mobileX.current - (constants.PLAYER_WIDTH / 2) - (constants.PLAYER_PX_WIDTH / 2))
         }
       }
-      if (mobileX.current > currentPosition.current + constants.PLAYER_WIDTH && (currentPosition.current + constants.PLAYER_WIDTH < 99)) {
-        if ((currentPosition.current + constants.PLAYER_WIDTH) - mobileX.current > constants.MOVE_VALUE) {
+      if (mobileX.current > currentPosition.current + constants.PLAYER_WIDTH + constants.PLAYER_PX_WIDTH && (currentPosition.current + constants.PLAYER_WIDTH + constants.PLAYER_PX_WIDTH < 99)) {
+        if ((currentPosition.current + constants.PLAYER_WIDTH + constants.PLAYER_PX_WIDTH) - mobileX.current > constants.MOVE_VALUE) {
           setPlayerPositionX(playerPositionX => playerPositionX + constants.MOVE_VALUE);
         } else {
-          setPlayerPositionX(mobileX.current - constants.PLAYER_WIDTH / 2)
+          setPlayerPositionX(mobileX.current - (constants.PLAYER_WIDTH / 2) - (constants.PLAYER_PX_WIDTH)
         }
       }
     }
@@ -179,7 +179,7 @@ function App() {
     const colisionTop = obstacleTop > constants.PLAYER_POSITION_Y
     const colisionBottom = obstacleTop < constants.PLAYER_POSITION_Y + constants.COLISION_RANGE
     if (colisionTop && colisionBottom) {
-      if (playerPositionX <= friesLeft + constants.FRIES_WIDTH && playerPositionX >= friesLeft - constants.PLAYER_WIDTH) {
+      if (playerPositionX <= friesLeft + constants.FRIES_WIDTH && playerPositionX >= friesLeft - (constants.PLAYER_WIDTH + constants.PLAYER_PX_WIDTH)) {
         setScore(score => score + 1)
         console.log(obstacleTop)
         setFriesTop(-constants.FRIES_HEIGHT);
