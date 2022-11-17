@@ -212,8 +212,18 @@ function App() {
           top={obstacleTop}
           height={constants.FRIES_HEIGHT}
           left={friesLeft}
-          width={constants.FRIES_WIDTH} />
-        <Player id='player' width={constants.PLAYER_WIDTH} height={constants.PLAYER_HEIGHT} top={constants.PLAYER_POSITION_Y} left={playerPositionX} />
+          width={constants.FRIES_WIDTH}
+          pxWidth={constants.FRIES_PX_WIDTH}
+          pxHeight={constants.FRIES_PX_HEIGHT}
+          />
+        <Player id='player' 
+        width={constants.PLAYER_WIDTH} 
+        height={constants.PLAYER_HEIGHT} 
+        top={constants.PLAYER_POSITION_Y} 
+        left={playerPositionX}
+        pxWidth={constants.PLAYER_PX_WIDTH}
+        pxHeight={constants.PLAYER_PX_HEIGHT}
+        />
       </Game>
     </Background>
   );
