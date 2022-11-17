@@ -179,7 +179,7 @@ function App() {
     const colisionTop = obstacleTop > constants.PLAYER_POSITION_Y
     const colisionBottom = obstacleTop < constants.PLAYER_POSITION_Y + constants.COLISION_RANGE
     if (colisionTop && colisionBottom) {
-      if (playerPositionX <= friesLeft + constants.FRIES_WIDTH && playerPositionX >= friesLeft - (constants.PLAYER_WIDTH + constants.PLAYER_PX_WIDTH)) {
+      if (playerPositionX <= friesLeft + constants.FRIES_WIDTH && playerPositionX >= friesLeft - (constants.PLAYER_WIDTH + constants.PLAYER_PX_WIDTH / document.clientWidth * 100)) {
         setScore(score => score + 1)
         console.log(obstacleTop)
         setFriesTop(-constants.FRIES_HEIGHT);
