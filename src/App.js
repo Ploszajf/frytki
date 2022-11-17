@@ -118,7 +118,7 @@ function App() {
           setPlayerPositionX(mobileX.current - (constants.PLAYER_WIDTH / 2) - (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100 / 2))
         }
       }
-      if (mobileX.current > currentPosition.current + constants.PLAYER_WIDTH / document.body.clientWidth * 100 + constants.PLAYER_PX_WIDTH && (currentPosition.current + constants.PLAYER_WIDTH + constants.PLAYER_PX_WIDTH < 99)) {
+      if (mobileX.current > currentPosition.current + constants.PLAYER_WIDTH + constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100 && (currentPosition.current + constants.PLAYER_WIDTH + constants.PLAYER_PX_WIDTH < 99)) {
         if ((currentPosition.current + constants.PLAYER_WIDTH + constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100) - mobileX.current > constants.MOVE_VALUE) {
           setPlayerPositionX(playerPositionX => playerPositionX + constants.MOVE_VALUE);
         } else {
