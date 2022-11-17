@@ -1,5 +1,5 @@
-export const PLAYER_WIDTH = 8;
-export const PLAYER_HEIGHT = 12;
+export const PLAYER_WIDTH = 6;
+export const PLAYER_HEIGHT = 9;
 export const PLAYER_POSITION_Y = 74;
 export const MOVE_VALUE = 0.7;
 export const FRIES_HEIGHT = 10;
