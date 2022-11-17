@@ -4,8 +4,8 @@ export class Player extends Component {
     render() {
         const style = {
             position: 'absolute',
-            height: this.props.height + 'vw',
-            width: this.props.width + 'vw',
+            height: `calc(${this.props.height}vw + ${this.props.pxHeight}px)`,
+            width: `calc(${this.props.width}vw + ${this.props.pxWidth}px)`,
             top: this.props.top + 'vh',
             left: this.props.left + '%'
         };
