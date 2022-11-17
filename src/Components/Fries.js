@@ -5,8 +5,8 @@ export class Fries extends Component {
         const style = {
             position: 'absolute',
             top: this.props.top + 'vh',
-            width: this.props.width + '%',
-            height: this.props.height + 'vw',
+            height: `calc(${this.props.height}vw + ${this.props.pxHeight}px)`,
+            width: `calc(${this.props.width}vw + ${this.props.pxWidth}px)`,
             left: this.props.left + '%',
             zIndex: '11'
         }
