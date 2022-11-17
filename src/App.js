@@ -102,7 +102,7 @@ function App() {
       if ((key === "a" || key === "A" || key === "ArrowLeft") && (currentPosition.current > 1)) {
         setPlayerPositionX(playerPositionX => playerPositionX - constants.MOVE_VALUE);
       }
-      if ((key === "d" || key === "D" || key === "ArrowRight") && ((currentPosition.current + constants.PLAYER_WIDTH + constants.PLAYER_PX_WIDTH) < 99)) {
+      if ((key === "d" || key === "D" || key === "ArrowRight") && ((currentPosition.current + constants.PLAYER_WIDTH + constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100) < 99)) {
         setPlayerPositionX(playerPositionX => playerPositionX + constants.MOVE_VALUE);
       }
       setTimeout(move, 5)
@@ -111,18 +111,18 @@ function App() {
 
   function mobileTouch() {
     if (touch.current) {
-      if (mobileX.current < currentPosition.current + constants.PLAYER_WIDTH + constants.PLAYER_PX_WIDTH && ((currentPosition.current) > 1)) {
-        if (mobileX.current - (currentPosition.current + constants.PLAYER_WIDTH + constants.PLAYER_PX_WIDTH) > constants.MOVE_VALUE) {
+      if (mobileX.current < currentPosition.current + constants.PLAYER_WIDTH + constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100 && ((currentPosition.current) > 1)) {
+        if (mobileX.current - (currentPosition.current + constants.PLAYER_WIDTH + constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100) > constants.MOVE_VALUE) {
           setPlayerPositionX(playerPositionX => playerPositionX - constants.MOVE_VALUE);
         } else {
-          setPlayerPositionX(mobileX.current - (constants.PLAYER_WIDTH / 2) - (constants.PLAYER_PX_WIDTH / 2))
+          setPlayerPositionX(mobileX.current - (constants.PLAYER_WIDTH / 2) - (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100 / 2))
         }
       }
-      if (mobileX.current > currentPosition.current + constants.PLAYER_WIDTH + constants.PLAYER_PX_WIDTH && (currentPosition.current + constants.PLAYER_WIDTH + constants.PLAYER_PX_WIDTH < 99)) {
-        if ((currentPosition.current + constants.PLAYER_WIDTH + constants.PLAYER_PX_WIDTH) - mobileX.current > constants.MOVE_VALUE) {
+      if (mobileX.current > currentPosition.current + constants.PLAYER_WIDTH / document.body.clientWidth * 100 + constants.PLAYER_PX_WIDTH && (currentPosition.current + constants.PLAYER_WIDTH + constants.PLAYER_PX_WIDTH < 99)) {
+        if ((currentPosition.current + constants.PLAYER_WIDTH + constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100) - mobileX.current > constants.MOVE_VALUE) {
           setPlayerPositionX(playerPositionX => playerPositionX + constants.MOVE_VALUE);
         } else {
-          setPlayerPositionX(mobileX.current - (constants.PLAYER_WIDTH / 2) - (constants.PLAYER_PX_WIDTH)
+          setPlayerPositionX(mobileX.current - (constants.PLAYER_WIDTH / 2) - (constants.PLAYER_PX_WIDTH/ document.body.clientWidth * 100)
         }
       }
     }
