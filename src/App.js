@@ -23,7 +23,8 @@ function App() {
   const [game, setGame] = useState(true);                         //Condition for the duration of the game
   const [score, setScore] = useState(0);                         //Number of scored points
   const [win, setWin] = useState();                               //Text of the message about the end of the game in the center of the screen
-  const [friesLeft, setFriesLeft] = useState(Math.random() * (100 - (constants.FRIES_WIDTH + constants.FRIES_PX_WIDTH / document.body.clientWidth * 100)) + (constants.FRIES_WIDTH + constants.FRIES_PX_WIDTH / document.body.clientWidth * 100))
+  const [friesLeft, setFriesLeft] = useState(Math.random() * ((100 - ((constants.FRIES_WIDTH + constants.FRIES_PX_WIDTH / document.body.clientWidth * 100) * 2) - 1) + 1)
+  )
   const [scoreboardVis, setScoreboadrVis] = useState("none");    //Showing/hiding scoreboard
   const [endMessageVis, setEndMessageVis] = useState("none");     //Showing/hiding the message about the end of the game
   const [gameVis, setGameVis] = useState("none");
@@ -153,7 +154,7 @@ function App() {
       }
       else {
         setFriesTop(-constants.FRIES_HEIGHT);
-        setFriesLeft(Math.random() * ((100 - (constants.FRIES_WIDTH + constants.FRIES_PX_WIDTH / document.body.clientWidth * 100) - 1) + 1))
+        setFriesLeft(Math.random() * ((100 - ((constants.FRIES_WIDTH + constants.FRIES_PX_WIDTH / document.body.clientWidth * 100) * 2) - 1) + 1))
         return () => {
           clearInterval(obsticleInterval)
         };
@@ -184,7 +185,8 @@ function App() {
       if (playerPositionX <= friesLeft + (constants.FRIES_WIDTH + constants.FRIES_PX_WIDTH / document.body.clientWidth * 100) && playerPositionX >= friesLeft - ((constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100)))) {
         setScore(score => score + 1)
         setFriesTop(-constants.FRIES_HEIGHT);
-        setFriesLeft(Math.random() * (100 - (constants.FRIES_WIDTH + constants.FRIES_PX_WIDTH / document.body.clientWidth * 100)) + (constants.FRIES_WIDTH + constants.FRIES_PX_WIDTH / document.body.clientWidth * 100))
+        setFriesLeft(Math.random() * ((100 - (constants.FRIES_WIDTH + constants.FRIES_PX_WIDTH / document.body.clientWidth * 100) - 1) + 1))
+
 
       }
     }
