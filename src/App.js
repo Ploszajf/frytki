@@ -113,9 +113,10 @@ function App() {
   function mobileTouch() {
     if (touch.current) {
       if (mobileX.current < currentPosition.current + (constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100)) && ((currentPosition.current) > 1)) {
+        console.log("gasi")
         if (mobileX.current - (currentPosition.current + (constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100))) > constants.MOVE_VALUE) {
           setPlayerPositionX(playerPositionX => playerPositionX - constants.MOVE_VALUE);
-        } else {
+        } else if (mobileX.current > 1) {
           setPlayerPositionX(mobileX.current - ((constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100)) / 2))
         }
       }
@@ -180,7 +181,6 @@ function App() {
   useEffect(() => {
     const colisionTop = obstacleTop > constants.PLAYER_POSITION_Y
     const colisionBottom = obstacleTop < constants.PLAYER_POSITION_Y + constants.COLISION_RANGE
-    console.log(friesLeft)
     if (colisionTop && colisionBottom) {
       if (playerPositionX <= friesLeft + (constants.FRIES_WIDTH + constants.FRIES_PX_WIDTH / document.body.clientWidth * 100) && playerPositionX >= friesLeft - ((constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100)))) {
         setScore(score => score + 1)
