@@ -23,13 +23,13 @@ function App() {
   const [game, setGame] = useState(true);                         //Condition for the duration of the game
   const [score, setScore] = useState(0);                         //Number of scored points
   const [win, setWin] = useState();                               //Text of the message about the end of the game in the center of the screen
-  const [friesLeft, setFriesLeft] = useState(Math.random() * ((100 - ((constants.FRIES_WIDTH + constants.FRIES_PX_WIDTH / document.body.clientWidth * 100) * 2) - 1) + 1)
-  )
+  const [friesLeft, setFriesLeft] = useState(Math.random() * ((100 - ((constants.FRIES_WIDTH + constants.FRIES_PX_WIDTH / document.body.clientWidth * 100) * 2) - 1) + 1))
   const [scoreboardVis, setScoreboadrVis] = useState("none");    //Showing/hiding scoreboard
   const [endMessageVis, setEndMessageVis] = useState("none");     //Showing/hiding the message about the end of the game
   const [gameVis, setGameVis] = useState("none");
   const [startingScreenVis, setStartingScreenVis] = useState("flex")
   const [start, setStart] = useState(false)
+  const [friesZIndex, setFriesZIndex] = useState(13)
   let key = "";                                                   //pressed key
 
 
@@ -112,21 +112,6 @@ function App() {
 
   function mobileTouch() {
     if (touch.current) {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       if (mobileX.current < currentPosition.current + ((constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100)) / 2)) {
         if (currentPosition.current > 1) {
           if (mobileX.current - (currentPosition.current + (constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100))) > constants.MOVE_VALUE) {
@@ -145,18 +130,6 @@ function App() {
           }
         }
       }
-
-
-
-
-
-
-
-
-
-
-
-
     }
   }
 
@@ -206,21 +179,36 @@ function App() {
     }
 
   }, [score])
+  //Fries zIndex
+
+
 
   //Colision with the fries
   useEffect(() => {
     const colisionTop = obstacleTop > constants.PLAYER_POSITION_Y
     const colisionBottom = obstacleTop < constants.PLAYER_POSITION_Y + constants.COLISION_RANGE
     if (colisionTop && colisionBottom) {
-      if (playerPositionX <= friesLeft + (constants.FRIES_WIDTH + constants.FRIES_PX_WIDTH / document.body.clientWidth * 100) && playerPositionX >= friesLeft - ((constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100)))) {
+      if (playerPositionX <= friesLeft && playerPositionX >= friesLeft + (constants.FRIES_WIDTH + constants.FRIES_PX_WIDTH / document.body.clientWidth * 100) - (constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100))) {
         setScore(score => score + 1)
         setFriesTop(-constants.FRIES_HEIGHT);
         setFriesLeft(Math.random() * ((100 - (constants.FRIES_WIDTH + constants.FRIES_PX_WIDTH / document.body.clientWidth * 100) - 1) + 1))
 
-
       }
     }
   }, [obstacleTop, playerPositionX, score, friesLeft]);
+
+  useEffect(() => {
+    if (obstacleTop > constants.PLAYER_POSITION_Y - constants.FRIES_SPEED * 2 && obstacleTop < constants.PLAYER_POSITION_Y) {
+      if (playerPositionX <= friesLeft && playerPositionX >= friesLeft + (constants.FRIES_WIDTH + constants.FRIES_PX_WIDTH / document.body.clientWidth * 100) - (constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100))) {
+        setFriesZIndex(11)
+      }
+    }
+    if (obstacleTop === -constants.FRIES_HEIGHT) {
+      setFriesZIndex(13)
+    }
+  }, [obstacleTop, playerPositionX, friesLeft]);
+
+
 
 
 
@@ -249,6 +237,7 @@ function App() {
           width={constants.FRIES_WIDTH}
           pxWidth={constants.FRIES_PX_WIDTH}
           pxHeight={constants.FRIES_PX_HEIGHT}
+          zIndex={friesZIndex}
         />
         <Player id='player'
           width={constants.PLAYER_WIDTH}

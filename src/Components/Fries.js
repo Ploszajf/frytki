@@ -8,7 +8,7 @@ export class Fries extends Component {
             height: `calc(${this.props.height}vw + ${this.props.pxHeight}px)`,
             width: `calc(${this.props.width}vw + ${this.props.pxWidth}px)`,
             left: this.props.left + '%',
-            zIndex: '11'
+            zIndex: this.props.zIndex
         }
         const imgStyle = {
             width: "100%",
