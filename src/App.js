@@ -153,7 +153,7 @@ function App() {
       }
       else {
         setFriesTop(-constants.FRIES_HEIGHT);
-        setFriesLeft(Math.random() * ((100 - (constants.FRIES_WIDTH + constants.FRIES_PX_WIDTH / document.body.clientWidth * 100)) + (constants.FRIES_WIDTH + constants.FRIES_PX_WIDTH / document.body.clientWidth * 100)) - (constants.FRIES_WIDTH + constants.FRIES_PX_WIDTH / document.body.clientWidth * 100))
+        setFriesLeft(Math.random() * ((100 - (constants.FRIES_WIDTH + constants.FRIES_PX_WIDTH / document.body.clientWidth * 100) - 1) + 1))
         return () => {
           clearInterval(obsticleInterval)
         };
