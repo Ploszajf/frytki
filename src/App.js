@@ -112,24 +112,55 @@ function App() {
 
   function mobileTouch() {
     if (touch.current) {
-      if (mobileX.current < currentPosition.current + (constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100)) && ((currentPosition.current) > 1)) {
-        console.log("gasi")
-        if (mobileX.current - (currentPosition.current + (constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100))) > constants.MOVE_VALUE) {
-          setPlayerPositionX(playerPositionX => playerPositionX - constants.MOVE_VALUE);
-        } else if (mobileX.current > 1) {
-          setPlayerPositionX(mobileX.current - ((constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100)) / 2))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      if (mobileX.current < currentPosition.current + ((constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100)) / 2)) {
+        if (currentPosition.current > 1) {
+          if (mobileX.current - (currentPosition.current + (constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100))) > constants.MOVE_VALUE) {
+            setPlayerPositionX(playerPositionX => playerPositionX - constants.MOVE_VALUE);
+          }
+          else if (mobileX.current > 1) {
+            setPlayerPositionX(mobileX.current - ((constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100)) / 2))
+          }
+        }
+      } else if (mobileX.current > currentPosition.current + ((constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100)) / 2)) {
+        console.log(3)
+        if (currentPosition.current + (constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100)) < 99) {
+          if (mobileX.current - (currentPosition.current + (constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100))) > constants.MOVE_VALUE) {
+            setPlayerPositionX(playerPositionX => playerPositionX + constants.MOVE_VALUE);
+          } else if (currentPosition.current + (constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100)) < 99) {
+            setPlayerPositionX(mobileX.current - ((constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100)) / 2))
+          }
         }
       }
-      if (mobileX.current > currentPosition.current + (constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100)) && (currentPosition.current + (constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100)) < 99)) {
-        if ((currentPosition.current + (constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100))) - mobileX.current > constants.MOVE_VALUE) {
-          setPlayerPositionX(playerPositionX => playerPositionX + constants.MOVE_VALUE);
-        } else {
-          setPlayerPositionX(mobileX.current - ((constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100)) / 2)
-          )
-        }
-      }
+
+
+
+
+
+
+
+
+
+
+
+
     }
   }
+
 
   function playAgain() {
     document.location.reload()
