@@ -180,6 +180,9 @@ function App() {
     const colisionTop = obstacleTop > constants.PLAYER_POSITION_Y
     const colisionBottom = obstacleTop < constants.PLAYER_POSITION_Y + constants.COLISION_RANGE
     if (colisionTop && colisionBottom) {
+      console.log(playerPositionX)
+      console.log(friesLeft + constants.FRIES_WIDTH)
+      console.log(friesLeft - ((constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100))))
       if (playerPositionX <= friesLeft + constants.FRIES_WIDTH && playerPositionX >= friesLeft - ((constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100)))) {
         setScore(score => score + 1)
         setFriesTop(-constants.FRIES_HEIGHT);
