@@ -99,11 +99,13 @@ function App() {
 
   //Movement of the player
   function move() {
+    console.log(document.body)
     if (pressedKey.current) {
       if ((key === "a" || key === "A" || key === "ArrowLeft") && (currentPosition.current > 1)) {
         setPlayerPositionX(playerPositionX => playerPositionX - constants.MOVE_VALUE);
       }
       if ((key === "d" || key === "D" || key === "ArrowRight") && ((currentPosition.current + (constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100))) < 99)) {
+
         setPlayerPositionX(playerPositionX => playerPositionX + constants.MOVE_VALUE);
       }
       setTimeout(move, 5)
@@ -188,14 +190,14 @@ function App() {
     const colisionTop = obstacleTop > constants.PLAYER_POSITION_Y
     const colisionBottom = obstacleTop < constants.PLAYER_POSITION_Y + constants.COLISION_RANGE
     if (colisionTop && colisionBottom) {
-      if (playerPositionX <= friesLeft && playerPositionX >= friesLeft + (constants.FRIES_WIDTH + constants.FRIES_PX_WIDTH / document.body.clientWidth * 100) - (constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100))) {
+      if (playerPositionX <= friesLeft && playerPositionX >= friesLeft + (constants.FRIES_WIDTH + constants.FRIES_PX_WIDTH / document.body.clientWidth * 100) - (constants.PLAYER_WIDTH + (constants.PLAYER_PX_WIDTH / document.body.clientWidth * 100)) && friesZIndex === 11) {
         setScore(score => score + 1)
         setFriesTop(-constants.FRIES_HEIGHT);
         setFriesLeft(Math.random() * ((100 - (constants.FRIES_WIDTH + constants.FRIES_PX_WIDTH / document.body.clientWidth * 100) - 1) + 1))
 
       }
     }
-  }, [obstacleTop, playerPositionX, score, friesLeft]);
+  }, [obstacleTop, playerPositionX, score, friesLeft, friesZIndex]);
 
   useEffect(() => {
     if (obstacleTop > constants.PLAYER_POSITION_Y - constants.FRIES_SPEED * 2 && obstacleTop < constants.PLAYER_POSITION_Y) {
